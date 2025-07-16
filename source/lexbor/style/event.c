@@ -247,10 +247,12 @@ lxb_style_event_destroy_element(lxb_dom_node_t *node)
 
 destroy:
 
-    ((lxb_css_rule_declaration_list_t *) (el->list))->first = NULL;
-    ((lxb_css_rule_declaration_list_t *) (el->list))->last = NULL;
+    if (el->list) {
+        ((lxb_css_rule_declaration_list_t *) (el->list))->first = NULL;
+        ((lxb_css_rule_declaration_list_t *) (el->list))->last = NULL;
 
-    el->list = lxb_css_rule_declaration_list_destroy(el->list, true);
+        el->list = lxb_css_rule_declaration_list_destroy(el->list, true);
+    }
 
     return LXB_STATUS_OK;
 }
